@@ -1,0 +1,143 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="masonry-sizer col-md-6"></div>
+<div class="masonry-item col-md-12 w-100" id="insert-voucher">
+    <?= Form::openForm('Form nhập liệu chứng từ', []) ?>
+        <div id="form-field">
+            <div id="clonedGroup1" class="clonedGroup">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <?=
+                            Form::dropDown([
+                                'label' => 'Chọn kiểu nhận dạng',
+                                'data' => [],
+                                'name' => 'identity-code-type',
+                                'cloneable' => true,
+                                'options' => [
+                                    'class' => 'identity-ct-dropdown'
+                                ]
+                            ]);
+                        ?>
+                    </div>
+                    <div class="form-group col-md-6 identity-code-group">
+                        <?=
+                            Form::inputField([
+                                'label' => 'Số hộ chiếu / CMND', 
+                                'name' => 'identity-code', 
+                                'type' => 'text',
+                                'value' => '',
+                                'options' => [
+                                    'placeholder' => 'Nhập số hộ chiếu nhân viên/CMND',
+                                    'class' => 'identity-code',
+                                    'disabled' => true
+                                ],
+                                'cloneable' => true
+                            ]);
+                        ?>
+                    </div>
+                    <button type="button" class="search btn btn-primary">Tra cứu</button> 
+                </div>
+                <hr width="50%">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <?=
+                            Form::inputField([
+                                'label' => 'Họ tên nhân viên', 
+                                'smallMessage' => 'Họ tên đầy đủ. VD: Nguyễn Văn A',
+                                'name' => 'name', 
+                                'type' => 'text',
+                                'value' => '',
+                                'options' => [
+                                    'id' => 'name',
+                                    'placeholder' => 'Nhập họ tên nhân viên', 
+                                ],
+                                'cloneable' => true
+                            ]);
+                        ?>
+                    </div>
+                </div>
+                
+                <div class="actions">
+                    <button type="button" class="clone btn btn-primary">Clone</button> 
+                    <button type="button" class="remove btn btn-primary">Remove</button>
+                </div>
+                <hr style="color:gray">
+            </div>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Lưu">
+    <?= Form::closeForm() ?>
+</div>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous">
+</script>
+<script>
+    var regex = /^(.+?)(\d+)$/i;
+    var cloneIndex = $(".clonedGroup").length;
+
+    function resizeSection() {
+        var height = $("#insert-voucher").outerHeight();
+        $("#mainContent").height(height);
+        $("#mainContent .masonry-sizer").height(height);
+        $("#mainContent .masonry").height(height);
+    }
+
+    function clone(e){
+        cloneIndex++;
+        $(this).parents(".clonedGroup").clone()
+            .appendTo($(this).parents("#form-field"))
+            .attr("id", "clonedGroup" +  cloneIndex)
+            .find("*")
+            .each(function() {
+                var id = this.id || "";
+                var match = id.match(regex) || [];
+                if (match.length == 3) {
+                    this.id = match[1] + (cloneIndex);
+                    if ($(this).hasClass("form-control")) {
+                        $($(this).siblings("label")[0]).attr("for", match[1] + (cloneIndex));
+                    }
+                }
+            })
+            .on('click', 'button.clone', clone)
+            .on('click', 'button.remove', remove);
+        bindCodeTypeDropdown("clonedGroup" +  cloneIndex);
+        resizeSection();
+    }
+
+    function remove(){
+        $(this).parents(".clonedGroup").remove();
+        resizeSection();
+    }
+
+    function bindCodeTypeDropdown(id) {
+        $("#"+id+" .identity-ct-dropdown").change(function (e) {
+            if (this.value != 0) {
+                $("#"+id+" .identity-code").prop('disabled', false);
+            } else {
+                $("#"+id+" .identity-code").prop('disabled', true);
+            }
+        });
+    }
+
+    function shakeRequired(id) {
+        var disabledGroup = $("#"+id)[0];
+        console.log(id);
+        
+        if ($('.indentity-code:disabled').parents(disabledGroup).length == 1) {
+            alert(123);
+        }
+        $(disabledGroup).click(function(e) {
+            alert(this.value);
+        });
+    }
+
+    $("button.clone").on("click", clone);
+
+    $("button.remove").on("click", remove);
+    
+    bindCodeTypeDropdown("clonedGroup" +  cloneIndex);
+    shakeRequired("clonedGroup" +  cloneIndex)
+</script>
+@endsection

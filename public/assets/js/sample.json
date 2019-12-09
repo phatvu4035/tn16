@@ -1,0 +1,12 @@
+{
+    "identity_code" : "12345678",
+    "emp_tax_code" : "12345678",
+    "emp_name" : "Lê Duy Hoàng",
+    "emp_code_date" : "15/03/2018",
+    "emp_code_place" : "Hà Nội",
+    "emp_country" : "VN",
+    "identity_type" : "mnv",
+    "emp_live_status" : "yes",
+    "emp_account_number" : "12345678",
+    "emp_account_bank" : "TPBank"
+}

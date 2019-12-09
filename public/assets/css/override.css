@@ -1,0 +1,103 @@
+.header-text {
+    line-height: 67px;
+    min-height: 67px;
+}
+
+.header, .navbar,.nav-right .dropdown-menu, .sidebar-menu .dropdown-menu, footer {
+    background-color: #181818 !important;
+    color: #dca145;
+}
+
+.sidebar {
+    background-color: #000000 !important;
+    color: #dca145;
+}
+
+#sidebar-toggle, .name-setting {
+    color: #dca145;
+}
+
+#sidebar-toggle:hover, .name-setting:hover {
+    color: white;
+}
+
+.dropdown-menu li a.bgcH-grey-100 {
+    color: #dca145 !important;
+    background-color: transparent !important;
+}
+
+.dropdown-menu li a.bgcH-grey-100:hover {
+    color: #fff !important;
+}
+
+.sidebar-menu .nav-item span {
+    color: #fff ;
+}
+
+.sidebar-menu .nav-item a:hover span {
+    color: #dca145 !important;
+}
+
+.nav-item.dropdown.open span, .sidebar-link.active span {
+    color: #dca145 !important;
+}
+
+.sidebar-menu .sidebar-link.active:before {
+    background-color: #dca145 !important;
+}
+
+.sidebar-menu>li.dropdown ul.dropdown-menu>li>a {
+    color: #fff ;
+}
+
+.sidebar-menu>li.dropdown ul.dropdown-menu>li>a:hover, .logo-text {
+    color: #dca145 !important;
+}
+
+main.main-content {
+    background-color: #f6f6f6 !important;
+}
+
+.sidebar-menu>li>a {
+    padding: 2.5px 15px !important;
+}
+
+@media screen and (max-width: 3000px) and (min-width: 992px) {
+    .is-collapsed .header {
+        width: calc(100% - 250px) !important;
+    }
+
+    .is-collapsed .sidebar {
+        width: 250px !important;
+    }
+
+    .is-collapsed .page-container {
+        padding-left: 250px !important;
+    }
+}
+
+.header .header-container {
+    height: 50px !important;
+}
+
+.header .header-container .nav-left>li>a, .header .header-container .nav-right>li>a {
+    line-height: 50px !important;
+    min-height: 50px !important;
+}
+
+.header.navbar {
+    height: 50px !important;
+}
+
+.ti-menu {
+    line-height: 50px !important;
+}
+
+.header-text {
+    line-height: 50px !important;
+    min-height: 50px !important;
+}
+
+.main-content {
+    padding: 65px 20px 20px !important;
+}
